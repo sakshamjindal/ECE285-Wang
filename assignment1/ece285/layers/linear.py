@@ -31,10 +31,10 @@ class Linear(BaseLayer):
         temp_x, temp_w, _ = self.cache
 
         # Calculate dx
-        # dx =
+        dx = dout @ temp_w.T
         # Calculate dw and db
-        # self.dw =
-        # self.db =
+        self.dw = temp_x.T @ dout
+        self.db = np.sum(dout, axis=0)
         # Return gradient for passing to the next layers
         return dx
 

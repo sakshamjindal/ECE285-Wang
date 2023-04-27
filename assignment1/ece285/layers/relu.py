@@ -17,5 +17,6 @@ class ReLU(BaseLayer):
         # Load the input from the cache
         x_temp = self.cache
         # Calculate gradient for RELU
-        dx = 1 if dx > 0 else 1
+        dx = dout.copy()
+        dx[np.where(x_temp < 0)] = 0
         return dx

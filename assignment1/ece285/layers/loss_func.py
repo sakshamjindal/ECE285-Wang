@@ -43,9 +43,12 @@ class CrossEntropyLoss(BaseLayer):
         loss_temp, x_temp, y_temp = self.cache
         N, _ = x_temp.shape
 
+        one_hot_y = np.zeros_like(x_temp)
+        one_hot_y[np.arange(N), y_temp] = 1
+
         # Use the formula for the gradient of Cross entropy loss to calculate the gradients
         # Gradient matrix will be NxD matrix, with N rows for all the samples in the minibatch, and D=3072
-        dx =
+        dx = x_temp - one_hot_y 
         assert x_temp.shape == dx.shape, "Mismatch in shape"
         # Normalize the gradient by dividing with the total number of samples N
         dx /= N
