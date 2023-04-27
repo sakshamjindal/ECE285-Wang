@@ -20,11 +20,11 @@ class Softmax(BaseLayer):
         # over the outputs for all the classes. e here is the exponential function
 
         # scores matrix must be of the dimension NxC, where C is the number of classes
-
         scores = input_x - np.max(input_x, axis=-1, keepdims=True)  # avoid numeric instability
 
         # Calculate softmax outputs e_i/sum(e_j)
-        # softmax_matrix =
+        scores = np.exp(scores)
+        softmax_matrix = scores/np.sum(scores, axis = 1, keepdims=True)
 
         assert scores.shape == input_x.shape, "Scores must be NxC"
 

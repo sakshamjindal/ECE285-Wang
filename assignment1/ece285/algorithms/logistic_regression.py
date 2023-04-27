@@ -99,7 +99,7 @@ def one_hot_encode(y_train):
     Returns:
         y_train: a numpy array of shape (N, C) containing training labels
     """
-    
+    # https://stackoverflow.com/questions/29831489/convert-array-of-indices-to-one-hot-encoded-array-in-numpy
     N = y_train.shape[0]
     C = np.max(y_train) + 1
     y_train = np.eye(C)[y_train]
