@@ -5,6 +5,7 @@ from ece285.layers.sequential import Sequential
 from ece285.layers.base_layer import BaseLayer
 from ece285.utils.evaluation import get_classification_accuracy
 
+import tqdm
 
 class Trainer(object):
     def __init__(
@@ -39,7 +40,7 @@ class Trainer(object):
         # self.logs = []
         training_loss = []
         eval_accuracies = []
-        for epoch in range(self.epoch):
+        for epoch in tqdm.tqdm(range(self.epoch)):
             epoch_loss = []
             for batch_x, batch_y in self.dataset.train_iteration(self.batch_size):
                 output_x = self.model(batch_x)
@@ -51,11 +52,11 @@ class Trainer(object):
                 # self.logs.append(current_log)
                 epoch_loss.append(loss)
 
-            print("Epoch Average Loss: {:3f}".format(np.mean(epoch_loss)))
+            #print("Epoch Average Loss: {:3f}".format(np.mean(epoch_loss)))
             training_loss.append(np.mean(epoch_loss))
 
             if epoch % self.validate_interval == 0:
                 eval_accuracy = self.validate()
                 eval_accuracies.append(eval_accuracy)
-                print("Validate Acc: {:.3f}".format(eval_accuracy))
+                #print("Validate Acc: {:.3f}".format(eval_accuracy))
         return training_loss, eval_accuracies
